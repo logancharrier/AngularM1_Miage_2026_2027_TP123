@@ -1,5 +1,7 @@
 # Guitar Practice Cloud — package étudiant
 
+Réalisé par Logan CHARRIER
+
 Ce dépôt contient uniquement les ressources nécessaires aux trois TP :
 `backend/` et `frontend-starter/`, ainsi que les sujets et documents utiles.
 

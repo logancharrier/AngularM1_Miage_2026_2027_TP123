@@ -1,12 +1,51 @@
 <section class="card">
   <h1>Connexion</h1>
-  <form [formGroup]="form" (ngSubmit)="submit()">
-    <label>Email<input type="email" formControlName="email" /></label>
-    <label>Mot de passe<input type="password" formControlName="password" /></label>
-    <button type="submit">Se connecter</button>
-  </form>
+
   @if (error()) {
-    <p class="error">{{ error() }}</p>
+    <div class="error-banner" role="alert">{{ error() }}</div>
   }
-  <p><a routerLink="/register">Créer un compte</a></p>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <label>
+      Email
+      <input
+        type="email"
+        formControlName="email"
+        placeholder="nom@exemple.com"
+        [class.input-invalid]="email.invalid && email.touched"
+        autocomplete="email"
+      />
+      @if (email.invalid && email.touched) {
+        @if (email.hasError('required')) {
+          <small class="field-error">L'adresse email est requise.</small>
+        } @else if (email.hasError('email')) {
+          <small class="field-error">Le format de l'adresse email est invalide.</small>
+        }
+      }
+    </label>
+
+    <label>
+      Mot de passe
+      <input
+        type="password"
+        formControlName="password"
+        placeholder="••••••••"
+        [class.input-invalid]="password.invalid && password.touched"
+        autocomplete="current-password"
+      />
+      @if (password.invalid && password.touched) {
+        @if (password.hasError('required')) {
+          <small class="field-error">Le mot de passe est requis.</small>
+        }
+      }
+    </label>
+
+    <button type="submit" [disabled]="loading()">
+      {{ loading() ? 'Connexion en cours...' : 'Se connecter' }}
+    </button>
+  </form>
+
+  <p>
+    Pas encore de compte ? <a routerLink="/register">Créer un compte</a>
+  </p>
 </section>

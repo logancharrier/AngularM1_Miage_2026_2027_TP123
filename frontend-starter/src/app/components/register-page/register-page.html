@@ -1,13 +1,71 @@
 <section class="card">
   <h1>Créer un compte</h1>
-  <form [formGroup]="form" (ngSubmit)="submit()">
-    <label>Nom<input formControlName="name" /></label>
-    <label>Email<input type="email" formControlName="email" /></label>
-    <label>Mot de passe<input type="password" formControlName="password" /></label>
-    <button type="submit">Créer mon compte</button>
-  </form>
+
   @if (error()) {
-    <p class="error">{{ error() }}</p>
+    <div class="error-banner" role="alert">{{ error() }}</div>
   }
-  <p><a routerLink="/login">Déjà inscrit ?</a></p>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <label>
+      Nom d'artiste / Nom complet
+      <input
+        type="text"
+        formControlName="name"
+        placeholder="Jimi Hendrix"
+        [class.input-invalid]="name.invalid && name.touched"
+        autocomplete="name"
+      />
+      @if (name.invalid && name.touched) {
+        @if (name.hasError('required')) {
+          <small class="field-error">Le nom est requis.</small>
+        } @else if (name.hasError('minlength')) {
+          <small class="field-error">Le nom doit comporter au moins 2 caractères.</small>
+        }
+      }
+    </label>
+
+    <label>
+      Email
+      <input
+        type="email"
+        formControlName="email"
+        placeholder="nom@exemple.com"
+        [class.input-invalid]="email.invalid && email.touched"
+        autocomplete="email"
+      />
+      @if (email.invalid && email.touched) {
+        @if (email.hasError('required')) {
+          <small class="field-error">L'adresse email est requise.</small>
+        } @else if (email.hasError('email')) {
+          <small class="field-error">Le format de l'adresse email est invalide.</small>
+        }
+      }
+    </label>
+
+    <label>
+      Mot de passe (8 caractères minimum)
+      <input
+        type="password"
+        formControlName="password"
+        placeholder="••••••••"
+        [class.input-invalid]="password.invalid && password.touched"
+        autocomplete="new-password"
+      />
+      @if (password.invalid && password.touched) {
+        @if (password.hasError('required')) {
+          <small class="field-error">Le mot de passe est requis.</small>
+        } @else if (password.hasError('minlength')) {
+          <small class="field-error">Le mot de passe doit comporter au moins 8 caractères.</small>
+        }
+      }
+    </label>
+
+    <button type="submit" [disabled]="loading()">
+      {{ loading() ? 'Création en cours...' : 'Créer mon compte' }}
+    </button>
+  </form>
+
+  <p>
+    Déjà inscrit ? <a routerLink="/login">Se connecter</a>
+  </p>
 </section>

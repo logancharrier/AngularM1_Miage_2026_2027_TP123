@@ -1,0 +1,82 @@
+[
+  {
+    "method": "POST",
+    "url": "/api/auth/login",
+    "status": 401,
+    "mimeType": "application/json",
+    "authorization": "absent",
+    "bodySent": "oui (non enregistré)"
+  },
+  {
+    "method": "POST",
+    "url": "/api/auth/login",
+    "status": 200,
+    "mimeType": "application/json",
+    "authorization": "absent",
+    "bodySent": "oui (non enregistré)"
+  },
+  {
+    "method": "GET",
+    "url": "/api/tracks?page=1&limit=5",
+    "status": 200,
+    "mimeType": "application/json",
+    "authorization": "Bearer <masqué>",
+    "bodySent": "non"
+  },
+  {
+    "method": "POST",
+    "url": "/api/tracks",
+    "status": 201,
+    "mimeType": "application/json",
+    "authorization": "Bearer <masqué>",
+    "bodySent": "non"
+  },
+  {
+    "method": "GET",
+    "url": "/api/tracks?page=1&limit=5",
+    "status": 200,
+    "mimeType": "application/json",
+    "authorization": "Bearer <masqué>",
+    "bodySent": "non"
+  },
+  {
+    "method": "GET",
+    "url": "/api/tracks/6ae768d478b8bdde81d8d289/audio",
+    "status": 200,
+    "mimeType": "audio/mpeg",
+    "authorization": "Bearer <masqué>",
+    "bodySent": "non"
+  },
+  {
+    "method": "DELETE",
+    "url": "/api/tracks/6ae768d478b8bdde81d8d289",
+    "status": 204,
+    "mimeType": "text/plain",
+    "authorization": "Bearer <masqué>",
+    "bodySent": "non"
+  },
+  {
+    "method": "GET",
+    "url": "/api/tracks?page=1&limit=5",
+    "status": 200,
+    "mimeType": "application/json",
+    "authorization": "Bearer <masqué>",
+    "bodySent": "non"
+  },
+  {
+    "method": "GET",
+    "url": "/api/users/me",
+    "status": 200,
+    "mimeType": "application/json",
+    "authorization": "Bearer <masqué>",
+    "bodySent": "non"
+  },
+  {
+    "method": "PUT",
+    "url": "/api/users/me",
+    "status": 200,
+    "mimeType": "application/json",
+    "authorization": "Bearer <masqué>",
+    "bodySent": "oui (non enregistré)"
+  }
+]

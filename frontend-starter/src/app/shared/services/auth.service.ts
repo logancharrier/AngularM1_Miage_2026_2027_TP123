@@ -9,7 +9,7 @@ import { User } from '../models/user.model';
 export class AuthService {
   private readonly http = inject(HttpClient);
 
-  readonly currentUser = signal<User | null>(null);
+  readonly currentUser = signal<User | null>(this.getStoredUser());
   readonly token = signal<string | null>(localStorage.getItem('gpc_token'));
 
   login(email: string, password: string) {
@@ -27,24 +27,45 @@ export class AuthService {
   profile() {
     return this.http
       .get<User>('/api/users/me')
-      .pipe(tap((user) => this.currentUser.set(user)));
+      .pipe(
+        tap((user) => {
+          this.currentUser.set(user);
+          localStorage.setItem('gpc_user', JSON.stringify(user));
+        })
+      );
   }
 
   update(name: string) {
     return this.http
       .put<User>('/api/users/me', { name })
-      .pipe(tap((user) => this.currentUser.set(user)));
+      .pipe(
+        tap((user) => {
+          this.currentUser.set(user);
+          localStorage.setItem('gpc_user', JSON.stringify(user));
+        })
+      );
   }
 
   logout(): void {
     localStorage.removeItem('gpc_token');
+    localStorage.removeItem('gpc_user');
     this.token.set(null);
     this.currentUser.set(null);
   }
 
   private storeAuthentication(response: AuthResponse): void {
     localStorage.setItem('gpc_token', response.token);
+    localStorage.setItem('gpc_user', JSON.stringify(response.user));
     this.token.set(response.token);
     this.currentUser.set(response.user);
+  }
+
+  private getStoredUser(): User | null {
+    try {
+      const stored = localStorage.getItem('gpc_user');
+      return stored ? (JSON.parse(stored) as User) : null;
+    } catch {
+      return null;
+    }
   }
 }

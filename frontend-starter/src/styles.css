@@ -27,6 +27,55 @@ button:disabled { opacity: 0.45; }
 .pager { margin: 1rem 0; }
 audio { width: 100%; }
 .error { color: #a33; }
+.field-error { color: #c62828; font-size: 0.8rem; margin-top: 0.2rem; }
+.error-banner {
+  padding: 0.75rem 1rem;
+  background-color: #ffebee;
+  color: #c62828;
+  border-left: 4px solid #d32f2f;
+  border-radius: 6px;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+.success-banner {
+  padding: 0.75rem 1rem;
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border-left: 4px solid #388e3c;
+  border-radius: 6px;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+.btn-secondary {
+  background: #eceff1;
+  color: #37474f;
+  border: 1px solid #cfd8dc;
+}
+.btn-secondary:hover {
+  background: #cfd8dc;
+}
+.btn-danger {
+  background: #d32f2f;
+  color: white;
+}
+.btn-danger:hover {
+  background: #b71c1c;
+}
+.input-invalid {
+  border-color: #e53935 !important;
+  background-color: #fffbfa;
+}
+
+.mat-mdc-snack-bar-container.snackbar-success {
+  --mat-snack-bar-container-color: #1f6f43;
+  --mat-snack-bar-supporting-text-color: #ffffff;
+  --mat-snack-bar-button-color: #ffffff;
+}
+.mat-mdc-snack-bar-container.snackbar-error {
+  --mat-snack-bar-container-color: #b3261e;
+  --mat-snack-bar-supporting-text-color: #ffffff;
+  --mat-snack-bar-button-color: #ffffff;
+}
 
 @media (max-width: 720px) {
   header, .grid { display: block; }
